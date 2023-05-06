@@ -33,22 +33,27 @@ cp .env.example .env
 > 4️⃣ run the script of choice with `yarn ts-node --files ./scripts/<script name>`
 
 1. To deploy the ballot contract, run
-   > `yarn ts-node --files ./scripts/01-deploy-ballot.ts <PROPOSAL_NAMES>`
-   >
+   ```
+   yarn ts-node --files ./scripts/01-deploy-ballot.ts <PROPOSAL_NAMES>
+   ```
    > > e.g: `yarn ts-node --files ./scripts/01-deploy-ballot.ts Alpha Beta Gamma`
 2. To give rights to vote, run
-   > `yarn ts-node --files ./scripts/giveRightToVote.ts <VOTER_ADDRESS>`
-   >
+   ```
+   yarn ts-node --files ./scripts/giveRightToVote.ts <VOTER_ADDRESS>
+   ```
    > > e.g: `yarn ts-node --files ./scripts/giveRightToVote.ts 0x90F79bf6EB2c4f870365E785982E1f101E93b906`
 3. To vote, run
-   > `yarn ts-node --files ./scripts/vote.ts <BALLOT_ADDRESS>`
-   >
+   ```
+   yarn ts-node --files ./scripts/vote.ts <BALLOT_ADDRESS>
+   ```
    > > e.g: `yarn ts-node --files ./scripts/vote.ts 0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED`
 4. To delegate vote, run
-   > `yarn ts-node --files ./scripts/delegateVote.ts <BALLOT_ADDRESS> <DELEGATE_ADDRESS>`
-   >
+   ```
+   yarn ts-node --files ./scripts/delegateVote.ts <BALLOT_ADDRESS> <DELEGATE_ADDRESS>
+   ```
    > > e.g: `yarn ts-node --files ./scripts/delegateVote.ts 0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED 0x90F79bf6EB2c4f870365E785982E1f101E93b906`
 5. To get the winning proposal, run
-   > `yarn ts-node --files ./scripts/winningProposal.ts <BALLOT_ADDRESS>`
-   >
+   ```
+   yarn ts-node --files ./scripts/winningProposal.ts <BALLOT_ADDRESS>
+   ```
    > > e.g: `yarn ts-node --files ./scripts/winningProposal.ts 0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED`
