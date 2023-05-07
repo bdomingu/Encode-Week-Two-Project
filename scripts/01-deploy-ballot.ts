@@ -24,33 +24,41 @@ async function main() {
   });
 
   console.log("------------------------------------------------------------");
+  try {
+    const ballotFactory = new Ballot__factory(signer);
+    const ballotContract = await ballotFactory.deploy(
+      proposals.map(ethers.utils.formatBytes32String)
+    );
+    const deployTx = await ballotContract.deployTransaction.wait();
+    console.log("Deploying Ballot Contract");
+    console.log("------------------------------------------------------------");
 
-  const ballotFactory = new Ballot__factory(signer);
-  const ballotContract = await ballotFactory.deploy(
-    proposals.map(ethers.utils.formatBytes32String)
-  );
-  const deployTx = await ballotContract.deployTransaction.wait();
-  console.log("Deploying Ballot Contract");
-  console.log("------------------------------------------------------------");
-
-  console.log(
-    `Ballot contract Deployed at: ${ballotContract.address} and the transaction hash is :${deployTx.blockHash}`
-  );
-  const chairperson = await ballotContract.chairperson();
-  console.log(`The current chairperson is : ${chairperson}`);
-  if (
-    !developmentChains.includes(network.name) &&
-    process.env.ETHERSCAN_API_KEY
-  ) {
-    await verify(ballotContract.address, [
-      "0x416c706861000000000000000000000000000000000000000000000000000000",
-      "0x4265746100000000000000000000000000000000000000000000000000000000",
-      "0x47616d6d61000000000000000000000000000000000000000000000000000000",
-    ]);
+    console.log(
+      `Ballot contract Deployed at: ${ballotContract.address} and the transaction hash is :${deployTx.blockHash}`
+    );
+    const chairperson = await ballotContract.chairperson();
+    console.log(`The current chairperson is : ${chairperson}`);
+    if (
+      !developmentChains.includes(network.name) &&
+      process.env.ETHERSCAN_API_KEY
+    ) {
+      await verify(ballotContract.address, [
+        "0x416c706861000000000000000000000000000000000000000000000000000000",
+        "0x4265746100000000000000000000000000000000000000000000000000000000",
+        "0x47616d6d61000000000000000000000000000000000000000000000000000000",
+      ]);
+    }
+    console.log(
+      "------------------------------------------------------------------"
+    );
+  } catch (err) {
+    if (err instanceof Error) {
+      // ✅ TypeScript knows err is Error
+      console.log(err.message);
+    } else {
+      console.log("Unexpected error", err);
+    }
   }
-  console.log(
-    "------------------------------------------------------------------"
-  );
 }
 
 // We recommend this pattern to be able to use async/await everywhere

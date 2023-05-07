@@ -30,7 +30,9 @@ yarn install
 cp .env.example .env
 ```
 
-> 4️⃣ run the script of choice with `yarn ts-node --files ./scripts/<script name>`
+# Usage
+
+> #### Run the script of choice with `yarn ts-node --files ./scripts/<script name>`
 
 1. To deploy the ballot contract, run
    ```
@@ -44,9 +46,9 @@ cp .env.example .env
    > > e.g: `yarn ts-node --files ./scripts/giveRightToVote.ts 0x90F79bf6EB2c4f870365E785982E1f101E93b906`
 3. To vote, run
    ```
-   yarn ts-node --files ./scripts/vote.ts <BALLOT_ADDRESS>
+   yarn ts-node --files ./scripts/vote.ts <BALLOT_ADDRESS> <PROPOSAL NUMBER>
    ```
-   > > e.g: `yarn ts-node --files ./scripts/vote.ts 0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED`
+   > > e.g: `yarn ts-node --files ./scripts/vote.ts 0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED 1`
 4. To delegate vote, run
    ```
    yarn ts-node --files ./scripts/delegateVote.ts <BALLOT_ADDRESS> <DELEGATE_ADDRESS>

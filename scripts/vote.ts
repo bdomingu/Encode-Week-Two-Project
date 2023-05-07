@@ -3,6 +3,7 @@ import { Ballot__factory } from "../typechain-types";
 
 async function main() {
   const ballotAddress = process.argv[2];
+  const proposalNumber = process.argv[3];
   const provider = new ethers.providers.JsonRpcProvider(
     process.env.SEPOLIA_RPC_URL
   );
@@ -15,20 +16,30 @@ async function main() {
   const ballotContract = ballotFactory.attach(ballotAddress);
   console.log(`Got contract Ballot at: ${ballotContract.address}`);
   console.log(`Voting from address: ${signer.address}`);
-  const proposal1 = await ballotContract.proposals("3");
-  console.log(
-    `Proposal Name: ${ethers.utils.parseBytes32String(proposal1.name)}`
-  );
-  console.log(`Proposal Vote Count: ${proposal1.voteCount.toString()}`);
-
-  //   const signer1ConnectedAccount = await ballotContract.connect(signer1);
-  const voteProposal = await ballotContract.vote("3");
-  const transactionResponseVote = voteProposal.wait();
-  const proposal0Updated = await ballotContract.proposals("3");
-  console.log(
-    `Proposal Name: ${ethers.utils.parseBytes32String(proposal0Updated.name)}`
-  );
-  console.log(`Proposal Vote Count: ${proposal0Updated.voteCount.toString()}`);
+  try {
+    const proposal1 = await ballotContract.proposals(proposalNumber);
+    console.log(
+      `Proposal Name: ${ethers.utils.parseBytes32String(proposal1.name)}`
+    );
+    console.log(`Proposal Vote Count: ${proposal1.voteCount.toString()}`);
+    //   const signer1ConnectedAccount = await ballotContract.connect(signer1);
+    const voteProposal = await ballotContract.vote(proposalNumber);
+    const transactionResponseVote = voteProposal.wait(6);
+    const proposal0Updated = await ballotContract.proposals(proposalNumber);
+    console.log(
+      `Proposal Name: ${ethers.utils.parseBytes32String(proposal0Updated.name)}`
+    );
+    console.log(
+      `Proposal Vote Count: ${proposal0Updated.voteCount.toString()}`
+    );
+  } catch (err) {
+    if (err instanceof Error) {
+      // ✅ TypeScript knows err is Error
+      console.log(err.message);
+    } else {
+      console.log("Unexpected error", err);
+    }
+  }
 }
 
 main()

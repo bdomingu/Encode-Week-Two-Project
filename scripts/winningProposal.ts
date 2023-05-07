@@ -10,22 +10,32 @@ async function main() {
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!);
   const signer = wallet.connect(provider);
   console.log(`The Signer address is: ${signer.address}`);
+  try {
+    const ballotFactory = new Ballot__factory(signer);
+    const ballotContract = ballotFactory.attach(ballotAddress);
+    console.log(`Got contract Ballot at ${ballotContract.address}`);
+    console.log(`Got contract Ballot at ${ballotContract.address}`);
+    const winningProposalNumber = await ballotContract.winningProposal();
 
-  const ballotFactory = new Ballot__factory(signer);
-  const ballotContract = ballotFactory.attach(ballotAddress);
-  console.log(`Got contract Ballot at ${ballotContract.address}`);
-  console.log(`Got contract Ballot at ${ballotContract.address}`);
-  const winningProposalNumber = await ballotContract.winningProposal();
-
-  const winningProposal = await ballotContract.proposals(winningProposalNumber);
-  const winningProposalVoteCount = winningProposal.voteCount;
-  const winnerName = await ballotContract.winnerName();
-  // console.log(`The winning proposal number is: ${winningProposal.toString()}`);
-  console.log(
-    `The winning proposal so far is ${ethers.utils.parseBytes32String(
-      winnerName
-    )} with ${winningProposalVoteCount} votes`
-  );
+    const winningProposal = await ballotContract.proposals(
+      winningProposalNumber
+    );
+    const winningProposalVoteCount = winningProposal.voteCount;
+    const winnerName = await ballotContract.winnerName();
+    // console.log(`The winning proposal number is: ${winningProposal.toString()}`);
+    console.log(
+      `The winning proposal so far is ${ethers.utils.parseBytes32String(
+        winnerName
+      )} with ${winningProposalVoteCount} votes`
+    );
+  } catch (err) {
+    if (err instanceof Error) {
+      // ✅ TypeScript knows err is Error
+      console.log(err.message);
+    } else {
+      console.log("Unexpected error", err);
+    }
+  }
 }
 
 main()

@@ -16,22 +16,30 @@ async function main() {
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!);
   const signer = wallet.connect(provider);
   console.log(`The Signer address is: ${signer.address}`);
-
-  const ballotFactory = new Ballot__factory(signer);
-  const ballotContract = ballotFactory.attach(ballotAddress);
-  console.log(`Got contract Ballot at ${ballotContract.address}`);
-  console.log(`Delegating your voting rights to ${delegateAddress}`);
-  console.log("------------------------------------------------------------");
-  const transactionResponse = await ballotContract.delegate(delegateAddress);
-  await transactionResponse.wait();
-  console.log(
-    `Successfully delegate your voting rights to ${delegateAddress}!`
-  );
-  const voterWeight = (await ballotContract.voters(signer.address)).weight;
-  console.log(`Your voting weight is ${voterWeight}`);
-  const delegateAddressWeight = (await ballotContract.voters(delegateAddress))
-    .weight;
-  console.log(`Your voting weight is ${delegateAddressWeight}`);
+  try {
+    const ballotFactory = new Ballot__factory(signer);
+    const ballotContract = ballotFactory.attach(ballotAddress);
+    console.log(`Got contract Ballot at ${ballotContract.address}`);
+    console.log(`Delegating your voting rights to ${delegateAddress}`);
+    console.log("------------------------------------------------------------");
+    const transactionResponse = await ballotContract.delegate(delegateAddress);
+    await transactionResponse.wait();
+    console.log(
+      `Successfully delegate your voting rights to ${delegateAddress}!`
+    );
+    const voterWeight = (await ballotContract.voters(signer.address)).weight;
+    console.log(`Your voting weight is ${voterWeight}`);
+    const delegateAddressWeight = (await ballotContract.voters(delegateAddress))
+      .weight;
+    console.log(`Your voting weight is ${delegateAddressWeight}`);
+  } catch (err) {
+    if (err instanceof Error) {
+      // ✅ TypeScript knows err is Error
+      console.log(err.message);
+    } else {
+      console.log("Unexpected error", err);
+    }
+  }
 }
 
 main()
