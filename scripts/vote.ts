@@ -8,7 +8,7 @@ async function main() {
     process.env.SEPOLIA_RPC_URL
   );
   //   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!);
-  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY_SCROLL!);
+  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY!);
   const signer = wallet.connect(provider);
   console.log(`The Signer address is: ${signer.address}`);
 
@@ -23,14 +23,16 @@ async function main() {
     );
     console.log(`Proposal Vote Count: ${proposal1.voteCount.toString()}`);
     //   const signer1ConnectedAccount = await ballotContract.connect(signer1);
-    const voteProposal = await ballotContract.vote(proposalNumber);
-    const transactionResponseVote = voteProposal.wait(6);
+    const transactionResponse = await ballotContract.vote(proposalNumber);
+    const transactionReceipt = await transactionResponse.wait();
     const proposal0Updated = await ballotContract.proposals(proposalNumber);
     console.log(
-      `Proposal Name: ${ethers.utils.parseBytes32String(proposal0Updated.name)}`
+      `Voted successfully for: ${ethers.utils.parseBytes32String(
+        proposal0Updated.name
+      )} and TxHash: ${transactionReceipt.blockHash}`
     );
     console.log(
-      `Proposal Vote Count: ${proposal0Updated.voteCount.toString()}`
+      `Updated proposal Vote Count: ${proposal0Updated.voteCount.toString()}`
     );
   } catch (err) {
     if (err instanceof Error) {

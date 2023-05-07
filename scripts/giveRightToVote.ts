@@ -11,8 +11,10 @@ async function main() {
     const transactionResponse = await ballotContract.giveRightToVote(
       voterAddress
     );
-    await transactionResponse.wait();
-    console.log(`The address ${voterAddress} now have right to vote!`);
+    const transactionReceipt = await transactionResponse.wait();
+    console.log(
+      `The address ${voterAddress} now have right to vote and TxHash: ${transactionReceipt.blockHash}`
+    );
     const voterWeight = (await ballotContract.voters(voterAddress)).weight;
     console.log(`Your voting weight is ${voterWeight}`);
   } catch (err) {
