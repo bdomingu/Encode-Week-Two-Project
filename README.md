@@ -10,7 +10,7 @@ Prerequisites: [Node (v18 LTS)](https://nodejs.org/en/download/) plus [Yarn (v1.
 
 > ### The Ballot Address on Sepolia Network is: `0x66eb0E81E85952816f4e629a929ce3D5f2B36fDB`
 >
-> > ### The Proposals are: Dunkin Starbucks Tims Peet (0 index based)
+> > ### Vote for your fav coffee chain: Dunkin Starbucks Tims Peet (0 index based)
 
 ---
 
