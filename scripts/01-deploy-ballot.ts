@@ -34,7 +34,7 @@ async function main() {
     console.log("------------------------------------------------------------");
 
     console.log(
-      `Ballot contract Deployed at: ${ballotContract.address} and the transaction hash is :${deployTx.blockHash}`
+      `Ballot contract Deployed at: ${ballotContract.address} and the transaction hash is :${deployTx.transactionHash}`
     );
     const chairperson = await ballotContract.chairperson();
     console.log(`The current chairperson is : ${chairperson}`);

@@ -29,7 +29,7 @@ async function main() {
     console.log(
       `Voted successfully for: ${ethers.utils.parseBytes32String(
         proposal0Updated.name
-      )} and TxHash: ${transactionReceipt.blockHash}`
+      )} and TxHash: ${transactionReceipt.transactionHash}`
     );
     console.log(
       `Updated proposal Vote Count: ${proposal0Updated.voteCount.toString()}`

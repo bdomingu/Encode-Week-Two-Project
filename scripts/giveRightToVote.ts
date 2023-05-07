@@ -13,7 +13,7 @@ async function main() {
     );
     const transactionReceipt = await transactionResponse.wait();
     console.log(
-      `The address ${voterAddress} now have right to vote and TxHash: ${transactionReceipt.blockHash}`
+      `The address ${voterAddress} now have right to vote and TxHash: ${transactionReceipt.transactionHash}`
     );
     const voterWeight = (await ballotContract.voters(voterAddress)).weight;
     console.log(`Your voting weight is ${voterWeight}`);

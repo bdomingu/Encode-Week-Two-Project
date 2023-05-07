@@ -26,7 +26,7 @@ async function main() {
     const transactionReceipt = await transactionResponse.wait();
 
     console.log(
-      `Successfully delegate your voting rights to ${delegateAddress}! TxHash: ${transactionReceipt.blockHash}`
+      `Successfully delegate your voting rights to ${delegateAddress}! TxHash: ${transactionReceipt.transactionHash}`
     );
     const voterWeight = (await ballotContract.voters(signer.address)).weight;
     console.log(`Your voting weight is ${voterWeight}`);

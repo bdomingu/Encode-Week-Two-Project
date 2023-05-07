@@ -8,7 +8,7 @@ Prerequisites: [Node (v18 LTS)](https://nodejs.org/en/download/) plus [Yarn (v1.
 
 🚨 If you are using a version < v18 you will need to remove `openssl-legacy-provider` from the `start` script in `package.json`
 
-The Ballot Address on Sepolia Network is: `0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED`
+The Ballot Address on Sepolia Network is: `0x66eb0E81E85952816f4e629a929ce3D5f2B36fDB`
 
 > 1️⃣ clone/fork 🏗
 > Encode-Week-Two-Project:
@@ -41,9 +41,9 @@ cp .env.example .env
    > > e.g: `yarn ts-node --files ./scripts/01-deploy-ballot.ts Alpha Beta Gamma`
 2. To give rights to vote, run
    ```
-   yarn ts-node --files ./scripts/giveRightToVote.ts <VOTER_ADDRESS>
+   yarn ts-node --files ./scripts/giveRightToVote.ts <BALLOT_ADDRESS> <VOTER_ADDRESS>
    ```
-   > > e.g: `yarn ts-node --files ./scripts/giveRightToVote.ts 0x90F79bf6EB2c4f870365E785982E1f101E93b906`
+   > > e.g: `yarn ts-node --files ./scripts/giveRightToVote.ts 0x66eb0E81E85952816f4e629a929ce3D5f2B36fDB 0x90F79bf6EB2c4f870365E785982E1f101E93b906`
 3. To vote, run
    ```
    yarn ts-node --files ./scripts/vote.ts <BALLOT_ADDRESS> <PROPOSAL NUMBER>
