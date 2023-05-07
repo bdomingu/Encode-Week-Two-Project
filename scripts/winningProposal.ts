@@ -14,7 +14,6 @@ async function main() {
     const ballotFactory = new Ballot__factory(signer);
     const ballotContract = ballotFactory.attach(ballotAddress);
     console.log(`Got contract Ballot at ${ballotContract.address}`);
-    console.log(`Got contract Ballot at ${ballotContract.address}`);
     const winningProposalNumber = await ballotContract.winningProposal();
 
     const winningProposal = await ballotContract.proposals(

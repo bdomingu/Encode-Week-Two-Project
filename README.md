@@ -52,14 +52,14 @@ cp .env.example .env
    ```
    yarn ts-node --files ./scripts/vote.ts <BALLOT_ADDRESS> <PROPOSAL NUMBER>
    ```
-   > > e.g: `yarn ts-node --files ./scripts/vote.ts 0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED 1`
+   > > e.g: `yarn ts-node --files ./scripts/vote.ts 0x66eb0E81E85952816f4e629a929ce3D5f2B36fDB 1`
 4. To delegate vote, run
    ```
    yarn ts-node --files ./scripts/delegateVote.ts <BALLOT_ADDRESS> <DELEGATE_ADDRESS>
    ```
-   > > e.g: `yarn ts-node --files ./scripts/delegateVote.ts 0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED 0x90F79bf6EB2c4f870365E785982E1f101E93b906`
+   > > e.g: `yarn ts-node --files ./scripts/delegateVote.ts 0x66eb0E81E85952816f4e629a929ce3D5f2B36fDB 0x90F79bf6EB2c4f870365E785982E1f101E93b906`
 5. To get the winning proposal, run
    ```
    yarn ts-node --files ./scripts/winningProposal.ts <BALLOT_ADDRESS>
    ```
-   > > e.g: `yarn ts-node --files ./scripts/winningProposal.ts 0x6965Bfc7a426C5038466B4aF339f6ef53F3E06ED`
+   > > e.g: `yarn ts-node --files ./scripts/winningProposal.ts 0x66eb0E81E85952816f4e629a929ce3D5f2B36fDB`
